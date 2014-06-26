@@ -52,6 +52,7 @@
     _tableView.delegate = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    _tableView.showsVerticalScrollIndicator = NO;
     [self addSubview:_tableView];    
 }
 
@@ -269,17 +270,29 @@
     }
 }
 
+#pragma mark OddLookCustom
+
+- (void)setCurrentYear:(NSDate *)date {
+    NSDateFormatter *monthDateFormatter = [NSDateFormatter new];
+    monthDateFormatter.calendar = self.calendar;
+    NSString *dateComponents = @"yyyy";
+    [monthDateFormatter setDateFormat:dateComponents];
+    _currentYear = [monthDateFormatter stringFromDate:date];
+}
+
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     NSDate *firstOfMonth = [self firstOfMonthForSection:indexPath.section];
+    [self setCurrentYear:firstOfMonth];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeYear" object:self];
     [(TSQCalendarCell *)cell setFirstOfMonth:firstOfMonth];
     if (indexPath.row > 0 || self.pinsHeaderToTop) {
         NSInteger ordinalityOfFirstDay = [self.calendar ordinalityOfUnit:NSDayCalendarUnit inUnit:NSWeekCalendarUnit forDate:firstOfMonth];
         NSDateComponents *dateComponents = [NSDateComponents new];
         dateComponents.day = 1 - ordinalityOfFirstDay;
-        dateComponents.week = indexPath.row - (self.pinsHeaderToTop ? 0 : 1);
+        dateComponents.weekOfMonth = indexPath.row - (self.pinsHeaderToTop ? 0 : 1);
         [(TSQCalendarRowCell *)cell setBeginningDate:[self.calendar dateByAddingComponents:dateComponents toDate:firstOfMonth options:0]];
         [(TSQCalendarRowCell *)cell selectColumnForDate:self.selectedDate];
         

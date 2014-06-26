@@ -97,12 +97,15 @@
  */
 @property (nonatomic, strong) Class rowCellClass;
 
+@property (nonatomic, readonly) NSString *currentYear;
+
 /** Scrolls the receiver until the specified date month is completely visible.
 
  @param date A date that identifies the month that will be visible.
  @param animated YES if you want to animate the change in position, NO if it should be immediate.
  */
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
+
 
 @end
 

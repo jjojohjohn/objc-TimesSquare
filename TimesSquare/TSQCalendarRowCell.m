@@ -45,6 +45,7 @@
 - (void)configureButton:(UIButton *)button;
 {
     button.titleLabel.font = [UIFont boldSystemFontOfSize:19.f];
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
     button.titleLabel.shadowOffset = self.shadowOffset;
     button.adjustsImageWhenDisabled = NO;
     [button setTitleColor:self.textColor forState:UIControlStateNormal];
@@ -56,7 +57,7 @@
     NSMutableArray *dayButtons = [NSMutableArray arrayWithCapacity:self.daysInWeek];
     for (NSUInteger index = 0; index < self.daysInWeek; index++) {
         UIButton *button = [[UIButton alloc] initWithFrame:self.contentView.bounds];
-        [button addTarget:self action:@selector(dateButtonPressed:) forControlEvents:UIControlEventTouchDown];
+        [button addTarget:self action:@selector(dateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [dayButtons addObject:button];
         [self.contentView addSubview:button];
         [self configureButton:button];
@@ -116,7 +117,6 @@
 - (void)setBeginningDate:(NSDate *)date;
 {
     _beginningDate = date;
-    
     if (!self.dayButtons) {
         [self createDayButtons];
         [self createNotThisMonthButtons];
@@ -133,6 +133,7 @@
     self.indexOfSelectedButton = -1;
     
     for (NSUInteger index = 0; index < self.daysInWeek; index++) {
+        // NSLog(@"%@", date);
         NSString *title = [self.dayFormatter stringFromDate:date];
         NSString *accessibilityLabel = [self.accessibilityFormatter stringFromDate:date];
         [self.dayButtons[index] setTitle:title forState:UIControlStateNormal];
