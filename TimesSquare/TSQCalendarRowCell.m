@@ -44,8 +44,7 @@
 
 - (void)configureButton:(UIButton *)button;
 {
-    button.titleLabel.font = [UIFont boldSystemFontOfSize:19.f];
-    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
     button.titleLabel.shadowOffset = self.shadowOffset;
     button.adjustsImageWhenDisabled = NO;
     [button setTitleColor:self.textColor forState:UIControlStateNormal];
@@ -57,6 +56,14 @@
     NSMutableArray *dayButtons = [NSMutableArray arrayWithCapacity:self.daysInWeek];
     for (NSUInteger index = 0; index < self.daysInWeek; index++) {
         UIButton *button = [[UIButton alloc] initWithFrame:self.contentView.bounds];
+
+        // Custom tab frame and hardcoded height for tabs
+        CGRect tabFrame = CGRectMake(0, 0, button.frame.size.width / 7.0, 8);
+        UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
+        // Tag is used to find imageView instantly
+        tabView.tag = 100;
+        [button addSubview:tabView];
+
         [button addTarget:self action:@selector(dateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [dayButtons addObject:button];
         [self.contentView addSubview:button];
@@ -95,6 +102,13 @@
     [self.todayButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.75f] forState:UIControlStateNormal];
 
     self.todayButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f / [UIScreen mainScreen].scale);
+
+    // Custom tab frame and hardcoded height for tabs
+    CGRect tabFrame = CGRectMake(0, 0, self.todayButton.frame.size.width / 7.0, 8);
+    UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
+    // Tag is used to find imageView instantly
+    tabView.tag = 100;
+    [self.todayButton addSubview:tabView];
 }
 
 - (void)createSelectedButton;
@@ -149,23 +163,29 @@
 
         NSInteger thisDayMonth = thisDateComponents.month;
         if (self.monthOfBeginningDate != thisDayMonth) {
-            [self.notThisMonthButtons[index] setHidden:NO];
+            [self.notThisMonthButtons[index] setHidden:YES];
         } else {
-
             if ([self.todayDateComponents isEqual:thisDateComponents]) {
                 self.todayButton.hidden = NO;
                 [self.todayButton setTitle:title forState:UIControlStateNormal];
                 [self.todayButton setAccessibilityLabel:accessibilityLabel];
                 self.indexOfTodayButton = index;
+                [self configureOddLookCalendarTab:self.todayButton forDate:date];
             } else {
                 UIButton *button = self.dayButtons[index];
                 button.enabled = ![self.calendarView.delegate respondsToSelector:@selector(calendarView:shouldSelectDate:)] || [self.calendarView.delegate calendarView:self.calendarView shouldSelectDate:date];
                 button.hidden = NO;
+                [self configureOddLookCalendarTab:button forDate:date];
             }
         }
 
         date = [self.calendar dateByAddingComponents:offset toDate:date options:0];
     }
+}
+
+/* OddLook's custom calendar button method; Override this method in custom calendar row cell */
+- (void)configureOddLookCalendarTab:(UIButton *)button forDate:(NSDate *)date {
+
 }
 
 - (void)setBottomRow:(BOOL)bottomRow;

@@ -65,4 +65,9 @@
  */
 - (void)selectColumnForDate:(NSDate *)date;
 
+- (void)configureOddLookCalendarTab:(UIButton *)button forDate:(NSDate *)date;
+
+- (id)initWithCalendar:(NSCalendar *)calendar reuseIdentifier:(NSString *)reuseIdentifier;
+
+
 @end

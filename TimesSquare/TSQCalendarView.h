@@ -106,6 +106,7 @@
  */
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
 
+- (void)reload;
 
 @end
 

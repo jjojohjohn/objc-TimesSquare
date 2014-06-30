@@ -37,7 +37,7 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
 
 + (CGFloat)cellHeight;
 {
-    return 65.0f;
+    return 70.0f;
 }
 
 - (NSDateFormatter *)monthDateFormatter;
@@ -87,7 +87,7 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
     self.headerLabels = headerLabels;
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.textColor = self.textColor;
-    self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0];
+    self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
     self.textLabel.shadowColor = [UIColor whiteColor];
     self.textLabel.shadowOffset = self.shadowOffset;
 }

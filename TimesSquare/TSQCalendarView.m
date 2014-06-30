@@ -245,6 +245,7 @@
 {
     NSDate *firstOfMonth = [self firstOfMonthForSection:section];
     NSRange rangeOfWeeks = [self.calendar rangeOfUnit:NSWeekCalendarUnit inUnit:NSMonthCalendarUnit forDate:firstOfMonth];
+    [self setCurrentYear:firstOfMonth];
     return (self.pinsHeaderToTop ? 0 : 1) + rangeOfWeeks.length;
 }
 
@@ -280,12 +281,15 @@
     _currentYear = [monthDateFormatter stringFromDate:date];
 }
 
+- (void)reload {
+    [self.tableView reloadData];
+}
+
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     NSDate *firstOfMonth = [self firstOfMonthForSection:indexPath.section];
-    [self setCurrentYear:firstOfMonth];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"changeYear" object:self];
     [(TSQCalendarCell *)cell setFirstOfMonth:firstOfMonth];
     if (indexPath.row > 0 || self.pinsHeaderToTop) {
