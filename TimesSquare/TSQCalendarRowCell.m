@@ -44,11 +44,17 @@
 
 - (void)configureButton:(UIButton *)button;
 {
-    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
-    button.titleLabel.shadowOffset = self.shadowOffset;
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0];
     button.adjustsImageWhenDisabled = NO;
     [button setTitleColor:self.textColor forState:UIControlStateNormal];
-    [button setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.layer.cornerRadius = 3.0f;
+    button.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 green:245.0 / 255.0 
+                                              blue:245.0 / 255.0 alpha:1.0];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, button.frame.size.height - 1.0, button.frame.size.width, 1)];
+
+    lineView.backgroundColor = [UIColor whiteColor];
+    [button addSubview:lineView];
+    
 }
 
 - (void)createDayButtons;
@@ -58,7 +64,13 @@
         UIButton *button = [[UIButton alloc] initWithFrame:self.contentView.bounds];
 
         // Custom tab frame and hardcoded height for tabs
-        CGRect tabFrame = CGRectMake(0, 0, button.frame.size.width / 7.0, 8);
+        CGRect tabFrame;
+        if (index == 0) {
+            tabFrame = CGRectMake(0, 0, (button.frame.size.width / 7.0) - 2.0, 6);
+        } else {
+            tabFrame = CGRectMake(0, 0, button.frame.size.width / 7.0 - 1.0, 6);
+        }
+
         UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
         // Tag is used to find imageView instantly
         tabView.tag = 100;
@@ -78,14 +90,27 @@
     NSMutableArray *notThisMonthButtons = [NSMutableArray arrayWithCapacity:self.daysInWeek];
     for (NSUInteger index = 0; index < self.daysInWeek; index++) {
         UIButton *button = [[UIButton alloc] initWithFrame:self.contentView.bounds];
+
+        CGRect tabFrame;
+        if (index == 0) {
+            tabFrame = CGRectMake(0, 0, (button.frame.size.width / 7.0) - 2.0, 6);
+        } else {
+            tabFrame = CGRectMake(0, 0, button.frame.size.width / 7.0 - 1.0, 6);
+        }
+
+        UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
+        // Tag is used to find imageView instantly
+        tabView.tag = 100;
+        [button addSubview:tabView];
+
+        [button addTarget:self action:@selector(notThisMonthDateButtonpressed:) forControlEvents:UIControlEventTouchUpInside];
         [notThisMonthButtons addObject:button];
         [self.contentView addSubview:button];
         [self configureButton:button];
 
-        button.enabled = NO;
         UIColor *backgroundPattern = [UIColor colorWithPatternImage:[self notThisMonthBackgroundImage]];
-        button.backgroundColor = backgroundPattern;
         button.titleLabel.backgroundColor = backgroundPattern;
+        button.titleLabel.alpha = 0.3;
     }
     self.notThisMonthButtons = notThisMonthButtons;
 }
@@ -99,12 +124,9 @@
     
     [self.todayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.todayButton setBackgroundImage:[self todayBackgroundImage] forState:UIControlStateNormal];
-    [self.todayButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.75f] forState:UIControlStateNormal];
-
-    self.todayButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f / [UIScreen mainScreen].scale);
 
     // Custom tab frame and hardcoded height for tabs
-    CGRect tabFrame = CGRectMake(0, 0, self.todayButton.frame.size.width / 7.0, 8);
+    CGRect tabFrame = CGRectMake(0, 0.5, self.todayButton.frame.size.width / 7.0 - 0.5, 6);
     UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
     // Tag is used to find imageView instantly
     tabView.tag = 100;
@@ -122,9 +144,7 @@
     self.selectedButton.enabled = NO;
     [self.selectedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.selectedButton setBackgroundImage:[self selectedBackgroundImage] forState:UIControlStateNormal];
-    [self.selectedButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.75f] forState:UIControlStateNormal];
-    
-    self.selectedButton.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f / [UIScreen mainScreen].scale);
+
     self.indexOfSelectedButton = -1;
 }
 
@@ -147,7 +167,6 @@
     self.indexOfSelectedButton = -1;
     
     for (NSUInteger index = 0; index < self.daysInWeek; index++) {
-        // NSLog(@"%@", date);
         NSString *title = [self.dayFormatter stringFromDate:date];
         NSString *accessibilityLabel = [self.accessibilityFormatter stringFromDate:date];
         [self.dayButtons[index] setTitle:title forState:UIControlStateNormal];
@@ -163,7 +182,8 @@
 
         NSInteger thisDayMonth = thisDateComponents.month;
         if (self.monthOfBeginningDate != thisDayMonth) {
-            [self.notThisMonthButtons[index] setHidden:YES];
+            [self.notThisMonthButtons[index] setHidden:NO];
+            //[self.notThisMonthButtons[index] setEnabled:YES];
         } else {
             if ([self.todayDateComponents isEqual:thisDateComponents]) {
                 self.todayButton.hidden = NO;
@@ -214,6 +234,13 @@
 {
     NSDateComponents *offset = [NSDateComponents new];
     offset.day = self.indexOfTodayButton;
+    NSDate *selectedDate = [self.calendar dateByAddingComponents:offset toDate:self.beginningDate options:0];
+    self.calendarView.selectedDate = selectedDate;
+}
+
+- (IBAction)notThisMonthDateButtonpressed:(id)sender {
+    NSDateComponents *offset = [NSDateComponents new];
+    offset.day = [self.notThisMonthButtons indexOfObject:sender];
     NSDate *selectedDate = [self.calendar dateByAddingComponents:offset toDate:self.beginningDate options:0];
     self.calendarView.selectedDate = selectedDate;
 }

@@ -53,6 +53,7 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     _tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.scrollEnabled = NO;
     [self addSubview:_tableView];    
 }
 

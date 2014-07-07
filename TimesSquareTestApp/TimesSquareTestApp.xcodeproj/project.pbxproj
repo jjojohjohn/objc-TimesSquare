@@ -7,12 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A885A9771694FCDD00CA6E1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9761694FCDD00CA6E1B /* UIKit.framework */; };
-		A885A9791694FCDD00CA6E1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9781694FCDD00CA6E1B /* Foundation.framework */; };
-		A885A97B1694FCDD00CA6E1B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A97A1694FCDD00CA6E1B /* CoreGraphics.framework */; };
 		A885A9951694FCDD00CA6E1B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9941694FCDD00CA6E1B /* SenTestingKit.framework */; };
-		A885A9961694FCDD00CA6E1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9761694FCDD00CA6E1B /* UIKit.framework */; };
-		A885A9971694FCDD00CA6E1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9781694FCDD00CA6E1B /* Foundation.framework */; };
 		A885A99F1694FCDD00CA6E1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A885A99D1694FCDD00CA6E1B /* InfoPlist.strings */; };
 		A885A9A21694FCDD00CA6E1B /* TimesSquareTestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A885A9A11694FCDD00CA6E1B /* TimesSquareTestAppTests.m */; };
 		A885A9B61694FD5400CA6E1B /* TSQTAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A885A9681694FC8A00CA6E1B /* TSQTAAppDelegate.m */; };
@@ -32,8 +27,11 @@
 		A885A9C61694FDE000CA6E1B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A885A95F1694FC8A00CA6E1B /* Default.png */; };
 		A885A9C71694FDE000CA6E1B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A885A9601694FC8A00CA6E1B /* Default@2x.png */; };
 		A885A9C81694FDE400CA6E1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A885A9621694FC8A00CA6E1B /* InfoPlist.strings */; };
-		A885A9C91694FEDA00CA6E1B /* libTimesSquare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9B21694FD3900CA6E1B /* libTimesSquare.a */; };
 		A885AA841695023500CA6E1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A885A9641694FC8A00CA6E1B /* main.m */; };
+		EBF35D871961EC1200262A5F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF35D861961EC1200262A5F /* UIKit.framework */; };
+		EBF35D8A1961EC2D00262A5F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF35D891961EC2D00262A5F /* Foundation.framework */; };
+		EBF35D8C1961EC3500262A5F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF35D8B1961EC3500262A5F /* CoreGraphics.framework */; };
+		EBF35D8D1961EC4200262A5F /* libTimesSquare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A885A9B21694FD3900CA6E1B /* libTimesSquare.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,9 +83,6 @@
 		A885A96B1694FC8A00CA6E1B /* TSQTAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQTAViewController.h; sourceTree = "<group>"; };
 		A885A96C1694FC8A00CA6E1B /* TSQTAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSQTAViewController.m; sourceTree = "<group>"; };
 		A885A9731694FCDD00CA6E1B /* TimesSquareTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimesSquareTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A885A9761694FCDD00CA6E1B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		A885A9781694FCDD00CA6E1B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		A885A97A1694FCDD00CA6E1B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		A885A9931694FCDD00CA6E1B /* TimesSquareTestAppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimesSquareTestAppTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A885A9941694FCDD00CA6E1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A885A99C1694FCDD00CA6E1B /* TimesSquareTestAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TimesSquareTestAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -95,6 +90,9 @@
 		A885A9A01694FCDD00CA6E1B /* TimesSquareTestAppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimesSquareTestAppTests.h; sourceTree = "<group>"; };
 		A885A9A11694FCDD00CA6E1B /* TimesSquareTestAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimesSquareTestAppTests.m; sourceTree = "<group>"; };
 		A885A9A91694FD3900CA6E1B /* TimesSquare.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TimesSquare.xcodeproj; path = ../TimesSquare.xcodeproj; sourceTree = "<group>"; };
+		EBF35D861961EC1200262A5F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		EBF35D891961EC2D00262A5F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EBF35D8B1961EC3500262A5F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +100,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A885A9C91694FEDA00CA6E1B /* libTimesSquare.a in Frameworks */,
-				A885A9771694FCDD00CA6E1B /* UIKit.framework in Frameworks */,
-				A885A9791694FCDD00CA6E1B /* Foundation.framework in Frameworks */,
-				A885A97B1694FCDD00CA6E1B /* CoreGraphics.framework in Frameworks */,
+				EBF35D8D1961EC4200262A5F /* libTimesSquare.a in Frameworks */,
+				EBF35D8C1961EC3500262A5F /* CoreGraphics.framework in Frameworks */,
+				EBF35D8A1961EC2D00262A5F /* Foundation.framework in Frameworks */,
+				EBF35D871961EC1200262A5F /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,8 +112,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A885A9951694FCDD00CA6E1B /* SenTestingKit.framework in Frameworks */,
-				A885A9961694FCDD00CA6E1B /* UIKit.framework in Frameworks */,
-				A885A9971694FCDD00CA6E1B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,10 +169,10 @@
 		A885A96E1694FCC000CA6E1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBF35D8B1961EC3500262A5F /* CoreGraphics.framework */,
+				EBF35D891961EC2D00262A5F /* Foundation.framework */,
+				EBF35D861961EC1200262A5F /* UIKit.framework */,
 				A885A9A91694FD3900CA6E1B /* TimesSquare.xcodeproj */,
-				A885A9761694FCDD00CA6E1B /* UIKit.framework */,
-				A885A9781694FCDD00CA6E1B /* Foundation.framework */,
-				A885A97A1694FCDD00CA6E1B /* CoreGraphics.framework */,
 				A885A9941694FCDD00CA6E1B /* SenTestingKit.framework */,
 			);
 			name = Frameworks;

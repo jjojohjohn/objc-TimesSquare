@@ -22,6 +22,15 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
 
 @implementation TSQCalendarMonthHeaderCell
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self createHeaderLabels];
+    }
+
+    return self;
+}
+
 - (id)initWithCalendar:(NSCalendar *)calendar reuseIdentifier:(NSString *)reuseIdentifier;
 {
     self = [super initWithCalendar:calendar reuseIdentifier:reuseIdentifier];
@@ -37,7 +46,7 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
 
 + (CGFloat)cellHeight;
 {
-    return 70.0f;
+    return 0.0;
 }
 
 - (NSDateFormatter *)monthDateFormatter;
@@ -73,7 +82,8 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
         label.textAlignment = NSTextAlignmentCenter;
         label.text = [dayFormatter stringFromDate:referenceDate];
         label.font = [UIFont boldSystemFontOfSize:12.f];
-        label.backgroundColor = self.backgroundColor;
+        //label.backgroundColor = self.backgroundColor;
+        label.backgroundColor = [UIColor lightTextColor];
         label.textColor = self.textColor;
         label.shadowColor = [UIColor whiteColor];
         label.shadowOffset = self.shadowOffset;
@@ -86,8 +96,8 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
     
     self.headerLabels = headerLabels;
     self.textLabel.textAlignment = NSTextAlignmentCenter;
-    self.textLabel.textColor = self.textColor;
-    self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:22.0];
+    self.textLabel.textColor = [UIColor darkGrayColor];
+    self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:22.0];
     self.textLabel.shadowColor = [UIColor whiteColor];
     self.textLabel.shadowOffset = self.shadowOffset;
 }
@@ -113,15 +123,17 @@ static const CGFloat TSQCalendarMonthHeaderCellMonthsHeight = 20.f;
 - (void)setFirstOfMonth:(NSDate *)firstOfMonth;
 {
     [super setFirstOfMonth:firstOfMonth];
-    self.textLabel.text = [self.monthDateFormatter stringFromDate:firstOfMonth];
+    //self.textLabel.text = [self.monthDateFormatter stringFromDate:firstOfMonth];
     self.accessibilityLabel = self.textLabel.text;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor;
 {
-    [super setBackgroundColor:backgroundColor];
+    [super setBackgroundColor:[UIColor lightTextColor]];
+    //[super setBackgroundColor:backgroundColor];
     for (UILabel *label in self.headerLabels) {
-        label.backgroundColor = backgroundColor;
+        //label.backgroundColor = backgroundColor;
+        label.backgroundColor = [UIColor lightTextColor];
     }
 }
 
