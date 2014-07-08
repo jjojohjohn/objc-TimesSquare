@@ -65,10 +65,10 @@
 
         // Custom tab frame and hardcoded height for tabs
         CGRect tabFrame;
-        if (index == 0) {
-            tabFrame = CGRectMake(0, 0, (button.frame.size.width / 7.0) - 2.0, 6);
+        if (index == 0 || index == 6) {
+            tabFrame = CGRectMake(0, 0, (button.frame.size.width / 7.0) - 1.5, 6);
         } else {
-            tabFrame = CGRectMake(0, 0, button.frame.size.width / 7.0 - 1.0, 6);
+            tabFrame = CGRectMake(0, 0, button.frame.size.width / 7.0 - 0.5, 6);
         }
 
         UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
@@ -122,11 +122,11 @@
     [self configureButton:self.todayButton];
     [self.todayButton addTarget:self action:@selector(todayButtonPressed:) forControlEvents:UIControlEventTouchDown];
     
-    [self.todayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.todayButton setTitleColor:self.textColor forState:UIControlStateNormal];
     [self.todayButton setBackgroundImage:[self todayBackgroundImage] forState:UIControlStateNormal];
 
     // Custom tab frame and hardcoded height for tabs
-    CGRect tabFrame = CGRectMake(0, 0.5, self.todayButton.frame.size.width / 7.0 - 0.5, 6);
+    CGRect tabFrame = CGRectMake(0, 0, self.todayButton.frame.size.width / 7.0 - 0.5, 6);
     UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
     // Tag is used to find imageView instantly
     tabView.tag = 100;
@@ -136,6 +136,13 @@
 - (void)createSelectedButton;
 {
     self.selectedButton = [[UIButton alloc] initWithFrame:self.contentView.bounds];
+    // Custom tab frame and hardcoded height for tabs
+    CGRect tabFrame = CGRectMake(0, 0.5, self.todayButton.frame.size.width / 7.0 - 0.5, 6);
+    UIImageView *tabView = [[UIImageView alloc] initWithFrame:tabFrame];
+    // Tag is used to find imageView instantly
+    tabView.tag = 100;
+    [self.selectedButton addSubview:tabView];
+
     [self.contentView addSubview:self.selectedButton];
     [self configureButton:self.selectedButton];
     
@@ -203,8 +210,13 @@
     }
 }
 
+#pragma mark- OddLook
 /* OddLook's custom calendar button method; Override this method in custom calendar row cell */
 - (void)configureOddLookCalendarTab:(UIButton *)button forDate:(NSDate *)date {
+
+}
+
+- (void)configureOddLookCalendarSelected:(UIButton *)button forDate:(NSDate *)date {
 
 }
 
@@ -293,6 +305,7 @@
     
     if (newIndexOfSelectedButton >= 0) {
         self.selectedButton.hidden = NO;
+        [self configureOddLookCalendarSelected:self.selectedButton forDate:date];
         NSString *newTitle = [self.dayButtons[newIndexOfSelectedButton] currentTitle];
         [self.selectedButton setTitle:newTitle forState:UIControlStateNormal];
         [self.selectedButton setTitle:newTitle forState:UIControlStateDisabled];
