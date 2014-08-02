@@ -136,21 +136,7 @@
     
     [[self cellForRowAtDate:_selectedDate] selectColumnForDate:nil];
     [[self cellForRowAtDate:startOfDay] selectColumnForDate:startOfDay];
-    NSIndexPath *newIndexPath = [self indexPathForRowAtDate:startOfDay];
-    CGRect newIndexPathRect = [self.tableView rectForRowAtIndexPath:newIndexPath];
-    CGRect scrollBounds = self.tableView.bounds;
-    
-    if (self.pagingEnabled) {
-        CGRect sectionRect = [self.tableView rectForSection:newIndexPath.section];
-        [self.tableView setContentOffset:sectionRect.origin animated:YES];
-    } else {
-        if (CGRectGetMinY(scrollBounds) > CGRectGetMinY(newIndexPathRect)) {
-            [self.tableView scrollToRowAtIndexPath:newIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        } else if (CGRectGetMaxY(scrollBounds) < CGRectGetMaxY(newIndexPathRect)) {
-            [self.tableView scrollToRowAtIndexPath:newIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        }
-    }
-    
+
     _selectedDate = startOfDay;
     
     if ([self.delegate respondsToSelector:@selector(calendarView:didSelectDate:)]) {
